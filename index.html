@@ -3,46 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mariana Genari - Estudante de Nutrição na UFV. Conteúdos sobre alimentação baseada em evidências, rotina universitária e ciência da nutrição.">
-    <meta name="theme-color" content="#FDFCFB">
-    <meta property="og:title" content="Mariana Genari | Estudante de Nutrição">
-    <meta property="og:description" content="Acompanhe minha jornada na nutrição com conteúdos baseados em evidências, receitas e rotina universitária.">
+    <meta name="description" content="Mariana Genari, estudante de Nutrição na UFV, compartilha conteúdo sobre alimentação baseada em evidências, rotina universitária e ciência da nutrição no Instagram e TikTok.">
+    <meta name="author" content="Mariana Genari">
+    <meta name="robots" content="index, follow">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#FBF6F1">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mariana Genari | Nutrição com Ciência e Leveza">
+    <meta property="og:description" content="Acompanhe minha jornada na nutrição com conteúdos baseados em evidências, receitas práticas e rotina universitária.">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://SEU-DOMINIO-AQUI.com.br/">
+    <meta property="og:image" content="img/mariana-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mariana Genari, de jaleco branco, sorrindo">
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    
-    <title>Mariana Genari | Nutrição & Ciência</title>
-    
-    <!-- Google Fonts: Manrope (Headings) e Inter (Body) -->
+    <meta name="twitter:title" content="Mariana Genari | Nutrição com Ciência e Leveza">
+    <meta name="twitter:description" content="Conteúdos sobre alimentação baseada em evidências, receitas práticas e rotina universitária.">
+    <meta name="twitter:image" content="img/mariana-og.jpg">
+
+    <link rel="canonical" href="https://SEU-DOMINIO-AQUI.com.br/">
+
+    <title>Mariana Genari | Nutrição com Ciência e Leveza</title>
+
+    <!-- Ícones -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Google Fonts: Fraunces (Display/Títulos) e Inter (Corpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="img/MariGenari.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Dados estruturados (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "name": "Mariana Genari",
+          "description": "Estudante de Nutrição na Universidade Federal de Viçosa (UFV), Campus Rio Paranaíba, e criadora de conteúdo sobre nutrição baseada em evidências.",
+          "image": "img/mariana-og.jpg",
+          "url": "https://SEU-DOMINIO-AQUI.com.br/",
+          "jobTitle": "Estudante de Nutrição",
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Universidade Federal de Viçosa (UFV) — Campus Rio Paranaíba"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "name": "Mariana Genari",
+          "url": "https://SEU-DOMINIO-AQUI.com.br/",
+          "inLanguage": "pt-BR"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Sem JavaScript, todo o conteúdo permanece visível (o preloader também não trava a tela). -->
+    <noscript>
+      <style>
+        .reveal { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+        #preloader { display: none !important; }
+      </style>
+    </noscript>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
     <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-content">
-            <span class="loader-text">Mariana Genari</span>
-            <div class="loader-bar"></div>
-        </div>
+    <div id="preloader" aria-hidden="true">
+        <span class="loader-mark">Mariana Genari</span>
     </div>
+
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <div id="nav-backdrop"></div>
 
     <!-- Header inteligente -->
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo" aria-label="Voltar ao topo">MG.</a>
             <nav class="navbar" id="navbar">
-                <ul class="nav-list">
+                <ul class="nav-links">
                     <li><a href="#sobre" class="nav-link">Sobre</a></li>
                     <li><a href="#jornada" class="nav-link">Jornada</a></li>
                     <li><a href="#conteudos" class="nav-link">Conteúdos</a></li>
                     <li><a href="#estudos" class="nav-link">Estudos</a></li>
                     <li><a href="#interativo" class="nav-link">Interativo</a></li>
-                    <li><a href="#contato" class="nav-link btn-outline-small">Contato</a></li>
+                    <li><a href="#contato" class="nav-cta">Contato</a></li>
                 </ul>
             </nav>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menu">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navbar">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -50,46 +112,63 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section id="hero" class="section hero-section">
             <div class="container hero-container">
                 <div class="hero-content reveal slide-up">
                     <span class="badge">Futura Nutricionista</span>
-                    <h1 class="hero-title">Nutrição com <span>ciência</span> e <span>leveza</span>.</h1>
+                    <h1 class="hero-title">Nutrição com <span class="accent-sage">ciência</span> e <span class="accent-clay">leveza</span>.</h1>
                     <p class="hero-subtitle">Estudante de Nutrição na UFV • Criadora de conteúdo sobre alimentação baseada em evidências e rotina universitária.</p>
                     <div class="hero-buttons">
                         <a href="#conteudos" class="btn btn-primary">Ver conteúdos</a>
                         <a href="#jornada" class="btn btn-secondary">Minha jornada</a>
                     </div>
                 </div>
-                <div class="hero-image-wrapper reveal fade-in">
-                    <!-- Foto da Mariana -->
-                    <img src="img/MariGenari.jpeg" alt="Mariana Genari de jaleco branco, sorrindo" class="hero-img" width="600" height="800" fetchpriority="high">
-                    <div class="floating-element el-1"></div>
-                    <div class="floating-element el-2"></div>
+                <div class="hero-image-wrapper reveal fade-in" data-tilt>
+                    <div class="floating-glow glow-clay" aria-hidden="true"></div>
+                    <div class="floating-glow glow-sage" aria-hidden="true"></div>
+                    <div class="hero-photo-frame">
+                        <picture>
+                            <source srcset="img/MariGenari.webp" type="image/webp">
+                            <img src="img/MariGenari.jpeg" alt="Mariana Genari, de jaleco branco, sorrindo com os braços cruzados" class="hero-img" width="600" height="800" fetchpriority="high">
+                        </picture>
+                    </div>
+                    <div class="floating-badge" aria-hidden="true">
+                        <span class="chip-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12.5V17c0 1.5 2.5 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 10v6"/></svg>
+                        </span>
+                        <span>UFV · Nutrição</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Estatísticas -->
+        <!-- Sobre / Estatísticas -->
         <section id="sobre" class="section stats-section">
-            <div class="container stats-container reveal slide-up">
-                <div class="stat-card">
-                    <h3 class="counter" data-target="19">0</h3>
-                    <p>Anos</p>
+            <div class="container">
+                <div class="about-intro reveal slide-up">
+                    <span class="eyebrow">Sobre mim</span>
+                    <h2>Ciência de verdade, sem complicação</h2>
+                    <p>Sou a Mariana — estudante de Nutrição na UFV e apaixonada por transformar evidência científica em conteúdo simples para o dia a dia. Aqui você acompanha minha rotina universitária, meus estudos e tudo o que aprendo pelo caminho.</p>
                 </div>
-                <div class="stat-card">
-                    <h3>UFV</h3>
-                    <p>Rio Paranaíba</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Nutrição</h3>
-                    <p>Graduação</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Criadora</h3>
-                    <p>Instagram & TikTok</p>
+                <div class="stats-container reveal slide-up">
+                    <div class="stat-card">
+                        <h3 class="counter" data-target="19">0</h3>
+                        <p>Anos</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>UFV</h3>
+                        <p>Rio Paranaíba</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Nutrição</h3>
+                        <p>Graduação</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Criadora</h3>
+                        <p>Instagram & TikTok</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -102,6 +181,7 @@
                     <p>O caminho que estou construindo na ciência da nutrição.</p>
                 </div>
                 <div class="timeline">
+                    <div class="timeline-progress" aria-hidden="true"></div>
                     <div class="timeline-item reveal fade-in-left">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
@@ -138,18 +218,26 @@
                     <p>Produzo conteúdos diferentes para cada plataforma. Acompanhe!</p>
                 </div>
                 <div class="grid-3">
-                    <a href="#" class="social-card reveal slide-up" style="transition-delay: 0.1s;">
-                        <div class="social-icon insta"></div>
+                    <a href="#" class="social-card reveal slide-up">
+                        <div class="social-icon insta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" stroke="none"/></svg>
+                        </div>
                         <h3>Instagram</h3>
                         <p>Rotina diária, bastidores da faculdade e dicas rápidas de alimentação.</p>
+                        <span class="btn-text">Seguir <span class="arrow" aria-hidden="true">→</span></span>
                     </a>
-                    <a href="#" class="social-card reveal slide-up" style="transition-delay: 0.2s;">
-                        <div class="social-icon tiktok"></div>
+                    <a href="#" class="social-card reveal slide-up">
+                        <div class="social-icon tiktok">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c0 2.5 2 4.5 4.5 4.5"/></svg>
+                        </div>
                         <h3>TikTok</h3>
                         <p>Vídeos dinâmicos, vlogs da UFV, receitas fáceis e desmistificando dietas.</p>
+                        <span class="btn-text">Seguir <span class="arrow" aria-hidden="true">→</span></span>
                     </a>
-                    <a href="#" class="social-card disabled reveal slide-up" style="transition-delay: 0.3s;">
-                        <div class="social-icon youtube"></div>
+                    <a href="#" class="social-card disabled reveal slide-up">
+                        <div class="social-icon youtube">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.2 15 12l-4.5 2.8Z" fill="currentColor" stroke-linejoin="round"/></svg>
+                        </div>
                         <h3>YouTube</h3>
                         <p>Em breve. Aulas completas, resumos de artigos científicos e vlogs longos.</p>
                         <span class="badge-sm">Futuro</span>
@@ -167,30 +255,45 @@
                 </div>
                 <div class="grid-3">
                     <div class="recipe-card reveal slide-up">
-                        <div class="recipe-img-placeholder" style="background: linear-gradient(135deg, var(--secondary-color), var(--bg-light));"></div>
-                        <div class="recipe-content">
+                        <div class="recipe-visual tone-1">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11.5a2 2 0 0 1-2 1.5H9a2 2 0 0 1-2-1.5L6 8Z"/><path d="M5 8h14"/><path d="M9 8V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V8"/><path d="M9 12.5c1 .6 2 .6 3 0s2-.6 3 0" opacity="0.55"/></svg>
+                        </div>
+                        <div class="recipe-body">
                             <span class="recipe-tag">Café da Manhã</span>
                             <h3>Overnight Oats de Frutas Vermelhas</h3>
-                            <p class="recipe-time">⏱ 5 min prep</p>
-                            <button class="btn btn-text">Ver receita &rarr;</button>
+                            <span class="recipe-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                                5 min prep
+                            </span>
+                            <a href="#conteudos" class="btn-text">Ver receita <span class="arrow" aria-hidden="true">→</span></a>
                         </div>
                     </div>
-                    <div class="recipe-card reveal slide-up" style="transition-delay: 0.1s;">
-                        <div class="recipe-img-placeholder" style="background: linear-gradient(135deg, var(--bg-light), var(--secondary-color));"></div>
-                        <div class="recipe-content">
+                    <div class="recipe-card reveal slide-up">
+                        <div class="recipe-visual tone-2">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17a7.5 7.5 0 0 1-7.5 8h-2a7.5 7.5 0 0 1-7.5-8Z"/><path d="M8 11V9.5"/><path d="M12 11V8"/><path d="M16 11V9.5"/><path d="M9 15.2h6" opacity="0.55"/></svg>
+                        </div>
+                        <div class="recipe-body">
                             <span class="recipe-tag">Almoço</span>
                             <h3>Bowl Proteico Universitário</h3>
-                            <p class="recipe-time">⏱ 20 min</p>
-                            <button class="btn btn-text">Ver receita &rarr;</button>
+                            <span class="recipe-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                                20 min
+                            </span>
+                            <a href="#conteudos" class="btn-text">Ver receita <span class="arrow" aria-hidden="true">→</span></a>
                         </div>
                     </div>
-                    <div class="recipe-card reveal slide-up" style="transition-delay: 0.2s;">
-                        <div class="recipe-img-placeholder" style="background: linear-gradient(135deg, var(--border-color), var(--secondary-color));"></div>
-                        <div class="recipe-content">
+                    <div class="recipe-card reveal slide-up">
+                        <div class="recipe-visual tone-3">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="8" rx="7" ry="2.3"/><path d="M5 8v4.5c0 1.3 3.1 2.3 7 2.3s7-1 7-2.3V8"/><path d="M5 12.5v4c0 1.3 3.1 2.3 7 2.3s7-1 7-2.3v-4"/><path d="M9.5 5.5c1 1 1 2 0 3s0 2 1 3" opacity="0.55"/></svg>
+                        </div>
+                        <div class="recipe-body">
                             <span class="recipe-tag">Lanche</span>
                             <h3>Panqueca de Aveia Mágica</h3>
-                            <p class="recipe-time">⏱ 10 min</p>
-                            <button class="btn btn-text">Ver receita &rarr;</button>
+                            <span class="recipe-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                                10 min
+                            </span>
+                            <a href="#conteudos" class="btn-text">Ver receita <span class="arrow" aria-hidden="true">→</span></a>
                         </div>
                     </div>
                 </div>
@@ -201,21 +304,21 @@
         <section id="biblioteca" class="section library-section">
             <div class="container">
                 <div class="library-container reveal slide-up">
-                    <div class="library-text">
+                    <div class="library-content">
                         <h2>Biblioteca Gratuita</h2>
                         <p>Materiais de apoio que criei para te ajudar a entender mais sobre nutrição, organização e estudos.</p>
                         <ul class="library-list">
-                            <li><span class="check">✓</span> Guia de Organização Universitária</li>
-                            <li><span class="check">✓</span> E-book: 10 Receitas Básicas</li>
-                            <li><span class="check">✓</span> Template Notion de Estudos</li>
-                            <li><span class="check">✓</span> Checklist de Mercado</li>
+                            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17l11-11"/></svg></span> Guia de Organização Universitária</li>
+                            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17l11-11"/></svg></span> E-book: 10 Receitas Básicas</li>
+                            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17l11-11"/></svg></span> Template Notion de Estudos</li>
+                            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17l11-11"/></svg></span> Checklist de Mercado</li>
                         </ul>
-                        <button class="btn btn-primary mt-2">Acessar Materiais</button>
+                        <a href="#contato" class="btn btn-primary">Acessar Materiais</a>
                     </div>
-                    <div class="library-visuals">
-                        <div class="book-mockup">PDF</div>
-                        <div class="book-mockup mockup-2">Notion</div>
-                        <div class="book-mockup mockup-3">Checklist</div>
+                    <div class="book-mockup" aria-hidden="true">
+                        <div class="book book-1">PDF</div>
+                        <div class="book book-2">Notion</div>
+                        <div class="book book-3">Checklist</div>
                     </div>
                 </div>
             </div>
@@ -228,73 +331,108 @@
                     <h2>O que estou estudando</h2>
                     <p>A base científica por trás da minha formação.</p>
                 </div>
-                <div class="studies-grid reveal slide-up">
+                <div class="studies-container reveal slide-up">
                     <div class="study-item">
-                        <div class="study-info">
-                            <span>Bioquímica Metabólica</span>
-                            <span>Avançado</span>
+                        <div class="study-header">
+                            <div>
+                                <h3>Bioquímica Metabólica</h3>
+                                <span class="study-level">Avançado</span>
+                            </div>
+                            <span class="study-percent">85%</span>
                         </div>
-                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
                     </div>
                     <div class="study-item">
-                        <div class="study-info">
-                            <span>Fisiologia Humana</span>
-                            <span>Avançado</span>
+                        <div class="study-header">
+                            <div>
+                                <h3>Fisiologia Humana</h3>
+                                <span class="study-level">Avançado</span>
+                            </div>
+                            <span class="study-percent">90%</span>
                         </div>
-                        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
                     </div>
                     <div class="study-item">
-                        <div class="study-info">
-                            <span>Microbiologia</span>
-                            <span>Intermediário</span>
+                        <div class="study-header">
+                            <div>
+                                <h3>Microbiologia</h3>
+                                <span class="study-level">Intermediário</span>
+                            </div>
+                            <span class="study-percent">60%</span>
                         </div>
-                        <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
                     </div>
                     <div class="study-item">
-                        <div class="study-info">
-                            <span>Bromatologia</span>
-                            <span>Em curso</span>
+                        <div class="study-header">
+                            <div>
+                                <h3>Bromatologia</h3>
+                                <span class="study-level">Em curso</span>
+                            </div>
+                            <span class="study-percent">40%</span>
                         </div>
-                        <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Interatividade: Mitos, Quiz e Dica -->
+        <!-- Interativo -->
         <section id="interativo" class="section interactive-section">
             <div class="container">
-                
-                <!-- Dica da Semana Dinâmica -->
-                <div class="tip-card reveal slide-up" id="dica-semana">
-                    <span class="tip-badge">Dica da Semana</span>
-                    <h3 id="tip-text">Beba água! A hidratação é o pilar mais negligenciado do metabolismo saudável.</h3>
+                <div class="section-header reveal slide-up">
+                    <h2>Mitos, Dicas e Quiz</h2>
+                    <p>Aprenda testando o que você já acredita saber sobre nutrição.</p>
+                </div>
+
+                <div class="tip-card reveal slide-up">
+                    <span class="badge">Dica da Semana</span>
+                    <p id="tip-text">Carregando dica...</p>
                 </div>
 
                 <div class="interactive-grid">
-                    <!-- Mitos e Verdades -->
                     <div class="myths-container reveal fade-in-left">
-                        <h3>Mitos e Verdades</h3>
-                        <p>Clique nos cards para revelar a ciência por trás.</p>
-                        
-                        <div class="myth-card" onclick="this.classList.toggle('active')">
-                            <div class="myth-front">Carboidrato à noite engorda?</div>
-                            <div class="myth-back"><strong>Mito!</strong> O que importa é o saldo calórico e a qualidade dos nutrientes ao longo do dia, não o horário.</div>
+                        <div class="myths-header">
+                            <h3>Mitos e Verdades</h3>
+                            <p>Clique nos cards para revelar a ciência por trás.</p>
                         </div>
-                        <div class="myth-card" onclick="this.classList.toggle('active')">
-                            <div class="myth-front">Água com limão emagrece?</div>
-                            <div class="myth-back"><strong>Mito!</strong> É ótimo para hidratação e vitamina C, mas não possui efeito direto na queima de gordura.</div>
-                        </div>
+
+                        <button type="button" class="myth-card" aria-expanded="false">
+                            <span class="myth-front">
+                                <span>Carboidrato à noite engorda?</span>
+                                <span class="myth-icon" aria-hidden="true">+</span>
+                            </span>
+                            <span class="myth-back">
+                                <span class="myth-back-inner"><strong>Mito!</strong> O que importa é o saldo calórico e a qualidade dos nutrientes ao longo do dia, não o horário.</span>
+                            </span>
+                        </button>
+
+                        <button type="button" class="myth-card" aria-expanded="false">
+                            <span class="myth-front">
+                                <span>Água com limão emagrece?</span>
+                                <span class="myth-icon" aria-hidden="true">+</span>
+                            </span>
+                            <span class="myth-back">
+                                <span class="myth-back-inner"><strong>Mito!</strong> É ótimo para hidratação e vitamina C, mas não possui efeito direto na queima de gordura.</span>
+                            </span>
+                        </button>
+
+                        <button type="button" class="myth-card" aria-expanded="false">
+                            <span class="myth-front">
+                                <span>Pular refeições ajuda a emagrecer?</span>
+                                <span class="myth-icon" aria-hidden="true">+</span>
+                            </span>
+                            <span class="myth-back">
+                                <span class="myth-back-inner"><strong>Mito!</strong> Pular refeições costuma levar a mais fome e exageros depois — o que conta é o padrão alimentar ao longo do dia, não pular etapas.</span>
+                            </span>
+                        </button>
                     </div>
 
-                    <!-- Quiz -->
                     <div class="quiz-container reveal fade-in-right">
                         <h3>Quiz Rápido</h3>
-                        <div id="quiz-area">
-                            <p class="quiz-question" id="question">Carregando quiz...</p>
-                            <div class="quiz-options" id="options"></div>
-                            <p class="quiz-feedback" id="feedback"></p>
-                        </div>
+                        <p class="quiz-subtitle">Teste seus conhecimentos.</p>
+                        <p class="quiz-question" id="question"></p>
+                        <div class="quiz-options" id="options"></div>
+                        <p class="quiz-feedback" id="feedback" aria-live="polite"></p>
                     </div>
                 </div>
             </div>
@@ -302,51 +440,48 @@
 
         <!-- Favoritos & Blog -->
         <section class="section favorites-section bg-light">
-            <div class="container grid-2">
-                
-                <!-- Favoritos -->
-                <div class="favorites reveal slide-up">
+            <div class="container favorites-blog-grid">
+                <div class="favorites-col reveal slide-up">
                     <h3>Meus Favoritos</h3>
                     <ul class="favorites-list">
                         <li>
                             <span class="fav-icon">📚</span>
-                            <div>
-                                <h4>O Cérebro Dieta</h4>
-                                <p>Livro</p>
+                            <div class="fav-info">
+                                <h4>Livro: "Nutrição Comportamental"</h4>
+                                <p>Minha leitura atual sobre psicologia alimentar.</p>
                             </div>
                         </li>
                         <li>
                             <span class="fav-icon">🎧</span>
-                            <div>
-                                <h4>Huberman Lab</h4>
-                                <p>Podcast de Ciência</p>
+                            <div class="fav-info">
+                                <h4>Podcast: "Ciência em Pauta"</h4>
+                                <p>Episódios sobre metabolismo que sempre recomendo.</p>
                             </div>
                         </li>
                         <li>
                             <span class="fav-icon">📱</span>
-                            <div>
-                                <h4>Notion</h4>
-                                <p>App de Organização</p>
+                            <div class="fav-info">
+                                <h4>App: Notion</h4>
+                                <p>Como organizo toda a minha rotina de estudos.</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-
-                <!-- Artigos Recentes (Blog Dummy) -->
-                <div class="blog-preview reveal slide-up" style="transition-delay: 0.2s;">
+                <div class="blog-col reveal slide-up">
                     <h3>Últimos Artigos</h3>
                     <div class="blog-card">
-                        <span class="blog-date">10 Ago, 2026</span>
-                        <h4>Como conciliar treinos e estudos na faculdade</h4>
-                        <a href="#" class="btn-text">Ler artigo &rarr;</a>
+                        <time class="blog-date" datetime="2026-08-10">10 Ago, 2026</time>
+                        <h4>Como organizar as refeições na correria da faculdade</h4>
+                        <p>Estratégias práticas para não deixar a alimentação de lado durante as provas.</p>
+                        <a href="#" class="btn-text">Ler artigo <span class="arrow" aria-hidden="true">→</span></a>
                     </div>
                     <div class="blog-card">
-                        <span class="blog-date">03 Ago, 2026</span>
-                        <h4>Entendendo a síntese proteica de forma simples</h4>
-                        <a href="#" class="btn-text">Ler artigo &rarr;</a>
+                        <time class="blog-date" datetime="2026-08-03">03 Ago, 2026</time>
+                        <h4>Entendendo os rótulos nutricionais</h4>
+                        <p>Um guia simples para interpretar tabelas nutricionais no supermercado.</p>
+                        <a href="#" class="btn-text">Ler artigo <span class="arrow" aria-hidden="true">→</span></a>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -360,7 +495,7 @@
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
                             Você já faz consultas nutricionais?
-                            <span class="icon">+</span>
+                            <span class="icon" aria-hidden="true">+</span>
                         </button>
                         <div class="accordion-content">
                             <p>Ainda não! Sou estudante de graduação. As consultas só podem ser realizadas por profissionais formados e com registro no CRN. Meu objetivo aqui é compartilhar estudos e informações científicas gerais.</p>
@@ -369,7 +504,7 @@
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
                             Em qual período você está na UFV?
-                            <span class="icon">+</span>
+                            <span class="icon" aria-hidden="true">+</span>
                         </button>
                         <div class="accordion-content">
                             <p>Estou trilhando minha jornada na UFV - Campus Rio Paranaíba, aproveitando cada disciplina e projeto de pesquisa para me tornar uma excelente profissional no futuro.</p>
@@ -378,7 +513,7 @@
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
                             Quais fontes você usa para os conteúdos?
-                            <span class="icon">+</span>
+                            <span class="icon" aria-hidden="true">+</span>
                         </button>
                         <div class="accordion-content">
                             <p>Utilizo bases de dados científicas como PubMed, Scielo e diretrizes de organizações oficiais de saúde, traduzindo artigos complexos para uma linguagem acessível.</p>
@@ -394,9 +529,18 @@
                 <h2>Vamos conversar?</h2>
                 <p>Acompanhe minha rotina, mande suas dúvidas acadêmicas ou propostas de parcerias.</p>
                 <div class="contact-links">
-                    <a href="#" class="btn btn-primary">Instagram</a>
-                    <a href="#" class="btn btn-secondary">TikTok</a>
-                    <a href="mailto:contato@exemplo.com" class="btn btn-outline">Email</a>
+                    <a href="#" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" stroke="none"/></svg>
+                        Instagram
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c0 2.5 2 4.5 4.5 4.5"/></svg>
+                        TikTok
+                    </a>
+                    <a href="mailto:contato@exemplo.com" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m3.5 6 8.5 6.5L20.5 6"/></svg>
+                        Email
+                    </a>
                 </div>
             </div>
         </section>
@@ -425,7 +569,7 @@
             </div>
         </div>
         <div class="container footer-bottom">
-            <p>&copy; 2026 Mariana Genari. Estudante de Nutrição.</p>
+            <p>&copy; <span id="current-year">2026</span> Mariana Genari. Estudante de Nutrição.</p>
             <p class="disclaimer">Aviso: Os conteúdos deste site são informativos e não substituem consulta com nutricionista habilitado.</p>
         </div>
     </footer>
@@ -433,6 +577,6 @@
     <!-- Voltar ao Topo -->
     <button id="back-to-top" aria-label="Voltar ao topo">&uarr;</button>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

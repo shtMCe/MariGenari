@@ -1,170 +1,271 @@
 /**
  * Website Mariana Genari - Scripts
  * Código puro (ES6+) focado em performance, interatividade e UX.
+ *
+ * Índice:
+ *  1. Preferências do usuário (movimento reduzido, ponteiro)
+ *  2. Preloader elegante
+ *  3. Scroll unificado (header, progresso, voltar ao topo, linha da jornada)
+ *  4. Menu mobile
+ *  5. Scroll suave para links internos
+ *  6. Revelação ao rolar (IntersectionObserver) + navbar ativa
+ *  7. Contadores animados
+ *  8. Acordeão (FAQ)
+ *  9. Dica da semana dinâmica
+ * 10. Quiz interativo
+ * 11. Mitos e verdades
+ * 12. Micro-interações: ondulação em botões, spotlight em cards, inclinação da foto
+ * 13. Rodapé: ano dinâmico
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Preloader Elegante
-    const preloader = document.getElementById('preloader');
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 600);
-        }, 500); // Pequeno atraso para visualização da marca
-    });
+    /* ============================================================
+       1. PREFERÊNCIAS DO USUÁRIO
+       ============================================================ */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    // 2. Header Inteligente (Scroll)
+    /* ============================================================
+       2. PRELOADER ELEGANTE
+       ============================================================ */
+    const preloader = document.getElementById('preloader');
+
+    const hidePreloader = () => {
+        if (!preloader) return;
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, prefersReducedMotion ? 0 : 600);
+    };
+
+    if (document.readyState === 'complete') {
+        setTimeout(hidePreloader, prefersReducedMotion ? 0 : 400);
+    } else {
+        window.addEventListener('load', () => {
+            setTimeout(hidePreloader, prefersReducedMotion ? 0 : 500);
+        });
+    }
+    // Rede de segurança: nunca deixa o preloader travado cobrindo o site.
+    setTimeout(hidePreloader, 4000);
+
+    /* ============================================================
+       3. SCROLL UNIFICADO
+       Um único listener (passivo, com rAF) cuida de: header
+       inteligente, barra de progresso, botão voltar-ao-topo e o
+       preenchimento da linha do tempo — evita múltiplos listeners
+       de scroll concorrentes e leituras de layout repetidas.
+       ============================================================ */
     const header = document.getElementById('header');
+    const backToTopBtn = document.getElementById('back-to-top');
+    const scrollProgressBar = document.getElementById('scroll-progress');
+    const timelineEl = document.querySelector('.timeline');
+    const timelineProgressEl = document.querySelector('.timeline-progress');
+
     let lastScroll = 0;
+    let ticking = false;
+
+    function updateTimelineProgress() {
+        if (!timelineEl || !timelineProgressEl) return;
+        const rect = timelineEl.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const startLine = vh * 0.85;
+        const endLine = vh * 0.4;
+        const total = rect.height + (startLine - endLine);
+        const traveled = startLine - rect.top;
+        let progress = total > 0 ? traveled / total : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        timelineProgressEl.style.setProperty('--progress', progress.toFixed(3));
+    }
+
+    function onScrollFrame() {
+        const y = window.scrollY;
+
+        if (header) {
+            header.classList.toggle('scrolled', y > 50);
+            header.classList.toggle('hidden', y > lastScroll && y > 200);
+        }
+        lastScroll = y;
+
+        if (backToTopBtn) {
+            backToTopBtn.classList.toggle('visible', y > 500);
+        }
+
+        if (scrollProgressBar) {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? y / docHeight : 0;
+            scrollProgressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+        }
+
+        updateTimelineProgress();
+
+        ticking = false;
+    }
 
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Adiciona background ao rolar
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (!ticking) {
+            requestAnimationFrame(onScrollFrame);
+            ticking = true;
         }
+    }, { passive: true });
 
-        // Esconde ao rolar para baixo, mostra ao rolar para cima
-        if (currentScroll > lastScroll && currentScroll > 200) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-        
-        lastScroll = currentScroll;
-    });
+    // Estado inicial (caso a página carregue já rolada, ex: âncora direta)
+    onScrollFrame();
 
-    // 3. Menu Mobile
+    /* ============================================================
+       4. MENU MOBILE
+       ============================================================ */
     const mobileToggle = document.getElementById('mobile-toggle');
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navBackdrop = document.getElementById('nav-backdrop');
 
-    mobileToggle.addEventListener('click', () => {
-        mobileToggle.classList.toggle('active');
-        navbar.classList.toggle('active');
-    });
+    function closeMobileMenu() {
+        mobileToggle.classList.remove('active');
+        navbar.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        if (navBackdrop) navBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileToggle.classList.remove('active');
-            navbar.classList.remove('active');
+    if (mobileToggle && navbar) {
+        mobileToggle.addEventListener('click', () => {
+            const isOpen = navbar.classList.toggle('active');
+            mobileToggle.classList.toggle('active', isOpen);
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
+            if (navBackdrop) navBackdrop.classList.toggle('active', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
-    });
 
-    // 4. Scroll Suave para Links Internos
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        if (navBackdrop) {
+            navBackdrop.addEventListener('click', closeMobileMenu);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navbar.classList.contains('active')) {
+                closeMobileMenu();
+                mobileToggle.focus();
+            }
+        });
+    }
+
+    /* ============================================================
+       5. SCROLL SUAVE PARA LINKS INTERNOS
+       ============================================================ */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if(targetId === '#') return;
-            
-            e.preventDefault();
+            if (targetId === '#') return;
+
             const targetElement = document.querySelector(targetId);
-            
             if (targetElement) {
+                e.preventDefault();
                 const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
+
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: "smooth"
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
+
+                // Move o foco para a seção de destino após a rolagem, mantendo
+                // a navegação por teclado e leitor de tela sincronizada.
+                targetElement.setAttribute('tabindex', '-1');
+                targetElement.addEventListener('blur', () => targetElement.removeAttribute('tabindex'), { once: true });
+                setTimeout(() => targetElement.focus({ preventScroll: true }), prefersReducedMotion ? 0 : 500);
             }
         });
     });
 
-    // 5. Intersection Observer para Animações e Navbar Ativa
-    const sections = document.querySelectorAll('section');
+    /* ============================================================
+       6. REVELAÇÃO AO ROLAR + NAVBAR ATIVA
+       ============================================================ */
+    const sections = document.querySelectorAll('section[id]');
     const revealElements = document.querySelectorAll('.reveal');
-
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                
-                // Animação de contadores se for a seção de stats
-                if(entry.target.classList.contains('stats-container')) {
+
+                if (entry.target.classList.contains('stats-container')) {
                     startCounters();
                 }
-                
+
                 observer.unobserve(entry.target);
             }
         });
-    }, revealOptions);
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Navbar Ativa
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                let id = entry.target.getAttribute('id');
+                const id = entry.target.getAttribute('id');
                 navLinks.forEach(link => {
                     link.classList.remove('active');
+                    link.removeAttribute('aria-current');
                     if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('active');
+                        link.setAttribute('aria-current', 'true');
                     }
                 });
             }
         });
     }, { threshold: 0.3 });
 
-    sections.forEach(section => {
-        if(section.getAttribute('id')) sectionObserver.observe(section);
-    });
+    sections.forEach(section => sectionObserver.observe(section));
 
-    // 6. Contadores Animados
+    /* ============================================================
+       7. CONTADORES ANIMADOS
+       Easing suave via requestAnimationFrame (ease-out-cubic) em vez
+       de incrementos lineares por setTimeout — resultado mais
+       premium e independente da taxa de quadros do dispositivo.
+       ============================================================ */
     let countersStarted = false;
-    function startCounters() {
-        if(countersStarted) return;
-        countersStarted = true;
-        
-        const counters = document.querySelectorAll('.counter');
-        const speed = 40; 
 
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / speed;
+    function animateCounter(counter) {
+        const target = +counter.getAttribute('data-target');
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 40);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCount();
-        });
+        if (prefersReducedMotion) {
+            counter.textContent = target;
+            return;
+        }
+
+        const duration = 1400;
+        const start = performance.now();
+
+        function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = Math.floor(target * eased);
+
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                counter.textContent = target;
+            }
+        }
+
+        requestAnimationFrame(tick);
     }
 
-    // 7. Botão Voltar ao Topo
-    const backToTopBtn = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 500) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    });
+    function startCounters() {
+        if (countersStarted) return;
+        countersStarted = true;
+        document.querySelectorAll('.counter').forEach(animateCounter);
+    }
 
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // 8. Accordion (FAQ)
+    /* ============================================================
+       8. ACORDEÃO (FAQ)
+       ============================================================ */
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     accordionHeaders.forEach(header => {
@@ -173,35 +274,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
 
-            // Fecha todos
-            document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+            document.querySelectorAll('.accordion-content').forEach(c => { c.style.maxHeight = null; });
             accordionHeaders.forEach(h => h.setAttribute('aria-expanded', 'false'));
 
-            // Abre o clicado se não estava aberto
             if (!isExpanded) {
                 header.setAttribute('aria-expanded', 'true');
-                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.maxHeight = content.scrollHeight + 'px';
             }
         });
     });
 
-    // 9. Dica da Semana Dinâmica
+    /* ============================================================
+       9. DICA DA SEMANA DINÂMICA
+       ============================================================ */
     const dicas = [
         "Beba água! A hidratação é o pilar mais negligenciado do metabolismo saudável.",
         "O sono regula hormônios fundamentais para a saciedade, como a leptina.",
         "Não existe alimento vilão ou herói. O contexto e a quantidade são o que importam.",
         "Planejar suas refeições no domingo economiza tempo, dinheiro e evita deslizes na semana."
     ];
-    
+
     const tipText = document.getElementById('tip-text');
-    if(tipText) {
-        // Seleciona uma dica baseada na semana do ano para parecer dinâmico
+    if (tipText) {
         const date = new Date();
         const week = Math.ceil(Math.floor((date - new Date(date.getFullYear(), 0, 1)) / (24 * 60 * 60 * 1000)) / 7);
         tipText.innerText = dicas[week % dicas.length];
     }
 
-    // 10. Quiz Interativo
+    /* ============================================================
+       10. QUIZ INTERATIVO
+       ============================================================ */
     const quizData = [
         {
             question: "Qual macronutriente é o mais importante para a manutenção da massa muscular?",
@@ -221,8 +323,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackEl = document.getElementById('feedback');
 
     function loadQuiz() {
-        if(!questionEl) return;
-        
+        if (!questionEl) return;
+
         feedbackEl.innerText = "";
         const currentData = quizData[currentQuiz];
         questionEl.innerText = currentData.question;
@@ -230,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentData.options.forEach((option, index) => {
             const button = document.createElement('button');
+            button.type = 'button';
             button.innerText = option;
             button.classList.add('quiz-option');
             button.addEventListener('click', () => selectOption(index, button));
@@ -238,20 +341,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function selectOption(index, button) {
-        // Desabilita botões
         const buttons = document.querySelectorAll('.quiz-option');
-        buttons.forEach(btn => btn.style.pointerEvents = 'none');
+        buttons.forEach(btn => { btn.style.pointerEvents = 'none'; });
 
         const isCorrect = index === quizData[currentQuiz].correct;
-        
+
         if (isCorrect) {
             button.classList.add('correct');
-            feedbackEl.style.color = "#137333";
+            feedbackEl.style.color = "";
+            feedbackEl.classList.remove('is-wrong');
+            feedbackEl.classList.add('is-correct');
             feedbackEl.innerText = "Exato! Baseado em evidências.";
         } else {
             button.classList.add('wrong');
             buttons[quizData[currentQuiz].correct].classList.add('correct');
-            feedbackEl.style.color = "#c5221f";
+            feedbackEl.classList.remove('is-correct');
+            feedbackEl.classList.add('is-wrong');
             feedbackEl.innerText = "Não foi dessa vez. A ciência diz o contrário.";
         }
 
@@ -263,9 +368,101 @@ document.addEventListener('DOMContentLoaded', () => {
                 questionEl.innerText = "Quiz concluído!";
                 optionsEl.innerHTML = "<p>Obrigada por participar! Continue acompanhando os conteúdos para aprender mais.</p>";
                 feedbackEl.innerText = "";
+                feedbackEl.classList.remove('is-correct', 'is-wrong');
             }
-        }, 2000);
+        }, 2200);
     }
 
     loadQuiz();
+
+    /* ============================================================
+       11. MITOS E VERDADES
+       Cards acessíveis via teclado: são <button> reais (não mais
+       div com onclick inline), então Enter/Espaço funcionam nativamente.
+       ============================================================ */
+    document.querySelectorAll('.myth-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const back = card.querySelector('.myth-back');
+            const isActive = card.classList.toggle('active');
+            card.setAttribute('aria-expanded', String(isActive));
+            if (back) {
+                back.style.maxHeight = isActive ? back.scrollHeight + 'px' : null;
+            }
+        });
+    });
+
+    /* ============================================================
+       12. MICRO-INTERAÇÕES
+       ============================================================ */
+
+    // -- Ondulação sutil ao clicar em botões (.btn) --
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            if (prefersReducedMotion) return;
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height) * 1.4;
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+            this.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    });
+
+    // -- Spotlight: brilho sutil que segue o cursor em cards premium --
+    // Um único listener delegado no documento (em vez de um por card) —
+    // mais leve e escala automaticamente para cards adicionados no futuro.
+    if (hasFinePointer && !prefersReducedMotion) {
+        let spotlightTicking = false;
+        let lastSpotlightEvent = null;
+
+        document.addEventListener('pointermove', (e) => {
+            const card = e.target.closest('.stat-card, .social-card, .recipe-card');
+            if (!card) return;
+            lastSpotlightEvent = { card, x: e.clientX, y: e.clientY };
+
+            if (!spotlightTicking) {
+                requestAnimationFrame(() => {
+                    if (lastSpotlightEvent) {
+                        const { card, x, y } = lastSpotlightEvent;
+                        const r = card.getBoundingClientRect();
+                        card.style.setProperty('--mx', `${x - r.left}px`);
+                        card.style.setProperty('--my', `${y - r.top}px`);
+                    }
+                    spotlightTicking = false;
+                });
+                spotlightTicking = true;
+            }
+        }, { passive: true });
+    }
+
+    // -- Inclinação sutil da foto do hero, acompanhando o cursor --
+    const tiltWrapper = document.querySelector('[data-tilt]');
+    const tiltFrame = tiltWrapper ? tiltWrapper.querySelector('.hero-photo-frame') : null;
+
+    if (tiltWrapper && tiltFrame && hasFinePointer && !prefersReducedMotion) {
+        tiltWrapper.addEventListener('pointermove', (e) => {
+            const r = tiltWrapper.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            tiltFrame.style.setProperty('--ry', `${(px * 7).toFixed(2)}deg`);
+            tiltFrame.style.setProperty('--rx', `${(-py * 7).toFixed(2)}deg`);
+        });
+
+        tiltWrapper.addEventListener('pointerleave', () => {
+            tiltFrame.style.setProperty('--rx', '0deg');
+            tiltFrame.style.setProperty('--ry', '0deg');
+        });
+    }
+
+    /* ============================================================
+       13. RODAPÉ: ANO DINÂMICO
+       ============================================================ */
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+
 });

@@ -1,0 +1,15 @@
+{
+  "name": "Mariana Genari — Nutrição com Ciência e Leveza",
+  "short_name": "Mariana Genari",
+  "description": "Conteúdo sobre nutrição baseada em evidências por Mariana Genari, estudante de Nutrição na UFV.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF6F1",
+  "theme_color": "#8C5D4E",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
